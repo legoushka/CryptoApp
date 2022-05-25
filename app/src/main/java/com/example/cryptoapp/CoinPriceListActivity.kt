@@ -14,11 +14,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_coin_price_list)
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        viewModel.loadData()
-        viewModel.priceList.observe(this, Observer {
-            Log.d("TEST_OF_LOADING_DATA", "Success in activity: $it ")
+//        viewModel.priceList.observe(this, Observer {
+//            Log.d("TEST_OF_LOADING_DATA", "Success in activity: $it ")
+//        })
+        viewModel.getDetailInfo("BTC").observe(this , Observer {
+            viewModel.priceList.observe(this, Observer {
+                Log.d("TEST_OF_LOADING_DATA", "Success in activity: $it ")
+            })
         })
     }
 }
